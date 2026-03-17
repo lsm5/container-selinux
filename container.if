@@ -931,7 +931,7 @@ template(`container_manage_files_template',`
 	manage_lnk_files_pattern($1_t, $2_file_t, $2_file_t)
 	manage_dirs_pattern($1_t, $2_file_t, $2_file_t)
 	manage_chr_files_pattern($1_t, $2_file_t, $2_file_t)
-	allow $1_t $2_file_t:chr_file { mmap_file_perms watch watch_reads };
+	allow $1_t $2_file_t:chr_file { mmap_file_perms  };
 	manage_blk_files_pattern($1_t, $2_file_t, $2_file_t)
 	manage_fifo_files_pattern($1_t, $2_file_t, $2_file_t)
 	manage_sock_files_pattern($1_t, $2_file_t, $2_file_t)

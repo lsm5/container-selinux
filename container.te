@@ -556,7 +556,6 @@ modutils_domtrans_kmod(container_runtime_domain)
 systemd_status_all_unit_files(container_runtime_domain)
 systemd_start_systemd_services(container_runtime_domain)
 systemd_dbus_chat_logind(container_runtime_domain)
-systemd_chat_resolved(container_runtime_domain)
 
 userdom_stream_connect(container_runtime_domain)
 userdom_search_user_home_content(container_runtime_domain)
@@ -895,7 +894,6 @@ allow container_domain container_runtime_domain:fd use;
 allow container_runtime_domain container_domain:fd use;
 allow container_domain self:socket_class_set { create_socket_perms map accept };
 allow container_domain self:lnk_file setattr;
-allow container_domain self:user_namespace create;
 
 dontaudit container_domain self:capability fsetid;
 allow container_domain self:association sendto;
@@ -904,7 +902,6 @@ dontaudit container_domain self:dir { write add_name };
 allow container_domain self:file rw_file_perms;
 allow container_domain self:lnk_file read_file_perms;
 allow container_domain self:fifo_file create_fifo_file_perms;
-allow container_domain self:fifo_file watch;
 allow container_domain self:filesystem associate;
 allow container_domain self:key manage_key_perms;
 allow container_domain self:netlink_route_socket r_netlink_socket_perms;
@@ -946,7 +943,6 @@ dev_rw_kvm(container_domain)
 dev_rwx_zero(container_domain)
 dev_write_rand(container_domain)
 dev_write_urand(container_domain)
-allow container_domain sysfs_t:dir watch;
 
 dontaudit container_domain container_runtime_tmpfs_t:dir read;
 allow container_domain container_runtime_tmpfs_t:dir mounton;
@@ -1553,7 +1549,7 @@ allow container_user_t container_file_t:file entrypoint;
 allow container_domain container_file_t:file entrypoint;
 allow container_domain container_ro_file_t:file { entrypoint execmod execute execute_no_trans getattr ioctl lock map open read };
 allow container_domain container_var_lib_t:file entrypoint;
-allow container_domain fusefs_t:file { append create entrypoint execmod execute execute_no_trans getattr ioctl link lock map mounton open read rename setattr unlink watch watch_reads write };
+allow container_domain fusefs_t:file { append create entrypoint execmod execute execute_no_trans getattr ioctl link lock map mounton open read rename setattr unlink  write };
 
 corecmd_entrypoint_all_executables(container_kvm_t)
 allow svirt_sandbox_domain exec_type:file { entrypoint execute execute_no_trans getattr ioctl lock map open read };
